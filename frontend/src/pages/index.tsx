@@ -1,6 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Header from '../components/Header'
+import Hero from '../components/Hero'
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
@@ -59,29 +60,41 @@ const Home: NextPage = () => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <Header />
+      <Hero />
       <main className="container mx-auto p-6">
         <h2 className="text-2xl font-bold mb-4">Live & Upcoming Token Launches</h2>
 
        {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {tokens.map((token) => (
-          <div key={token.id} className="bg-cardBg p-5 rounded-lg shadow-lg border border-[#292B3A] hover:scale-105 transition transform duration-200">
-            <div className="relative w-full h-32">
-              <Image 
-                src={token.image} 
-                alt={token.name} 
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg"
-              />
-            </div>
-            <h3 className="text-xl font-semibold text-white mt-4">{token.name} ({token.ticker})</h3>
-            <p className="text-sm text-gray-400">Market Cap: <span className="text-green-400">{token.marketCap}</span></p>
-            <p className="text-sm text-gray-400">Replies: {token.replies}</p>
-            <p className="text-xs text-blue-400">Chain: {token.chain}</p>
-          </div>
-        ))}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {tokens.map((token) => (
+            <Link key={token.id} href={`/token/${token.id}`} passHref>
+              <div className="cursor-pointer bg-[#111827] bg-opacity-80 backdrop-blur-lg border border-[#292B3A] hover:border-[#7B3FE4] 
+                p-5 rounded-xl shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-neon-glow relative group h-full flex flex-col">
+                
+                {/* Image Wrapper (Fixed Aspect Ratio) */}
+                <div className="relative w-full h-40 overflow-hidden rounded-lg">
+                  <Image 
+                    src={token.image} 
+                    alt={token.name} 
+                    layout="fill"
+                    objectFit="cover"
+                    className="transition-all duration-300 group-hover:scale-110 rounded-lg"
+                  />
+                </div>
+
+                {/* Token Details (Flexbox to push elements evenly) */}
+                <div className="flex flex-col flex-grow mt-4">
+                  <h3 className="text-2xl font-semibold text-white tracking-wide group-hover:text-[#7B3FE4] transition duration-300">
+                    {token.name} ({token.ticker})
+                  </h3>
+                  <p className="text-sm text-gray-400 mt-1">Market Cap: <span className="text-green-400">{token.marketCap}</span></p>
+                  <p className="text-sm text-gray-400">Replies: {token.replies}</p>
+                  <p className="text-xs text-blue-400">{token.chain}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
 
         <div className="mt-6">
           <Link href="/create">

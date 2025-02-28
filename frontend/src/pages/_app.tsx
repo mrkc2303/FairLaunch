@@ -1,4 +1,7 @@
-import '../styles/globals.css';
+import Head from 'next/head';
+import { useState, useEffect } from "react";
+import "../styles/globals.css";
+import SplashScreen from "../components/SplashScreen";
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
 
@@ -11,12 +14,23 @@ import { config } from '../wagmi';
 const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000);
+  }, []);
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={client}>
         <RainbowKitProvider>
+          <Head>
+            <link rel="icon" href="/favicon.ico" />
+            <title>FairLaunch</title>
+          </Head>
           <div className="min-h-screen bg-[#0D0D0D] text-white font-poppins">
-            <Component {...pageProps} />
+            {loading ? <SplashScreen onFinish={() => setLoading(false)} /> : <Component {...pageProps} />}
           </div>
         </RainbowKitProvider>
       </QueryClientProvider>
