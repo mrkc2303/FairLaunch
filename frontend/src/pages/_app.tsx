@@ -15,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={client}>
         <RainbowKitProvider>
-          <Component {...pageProps} />
+          <div className="min-h-screen bg-[#0D0D0D] text-white font-poppins">
+            <Component {...pageProps} />
+          </div>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
