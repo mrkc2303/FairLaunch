@@ -6,12 +6,12 @@ import { getERC20Contract, getFactoryContract, getNetworkConfig } from "../const
 import Header from "../components/Header";
 import ERC20ABI from "../constants/ERC20ABI.json"; // Standard ERC-20 ABI
 
-export default function CreateToken() {  // ✅ Removed `async`
+export default function CreateToken() { 
   const { address } = useAccount();
-  const { data: walletClient } = useWalletClient(); // ✅ Correct wallet client retrieval
+  const { data: walletClient } = useWalletClient();
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [loading, setLoading] = useState(false);
-  const [networkConfig, setNetworkConfig] = useState<any>(null); // ✅ Store network config
+  const [networkConfig, setNetworkConfig] = useState<any>(null);
   const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
 
   const [tokenDetails, setTokenDetails] = useState({
@@ -129,9 +129,9 @@ export default function CreateToken() {  // ✅ Removed `async`
                  placeholder="Enter Token Symbol (e.g. MEME)" />
 
           <label className="block mb-2 text-gray-300">Banner Image URL</label>
-          <input type="text" name="image" value={tokenDetails.banner} onChange={handleChange}
+          <input type="text" name="banner" value={tokenDetails.banner} onChange={handleChange}
                  className="w-full border p-2 rounded bg-[#2A2D3E] text-white mb-4"
-                 placeholder="Enter Image URL" />
+                 placeholder="Enter Banner Image URL" />
 
           <label className="block mb-2 text-gray-300">Token Image URL</label>
           <input type="text" name="image" value={tokenDetails.image} onChange={handleChange}
