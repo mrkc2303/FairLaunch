@@ -45,8 +45,8 @@ FairLaunch is a **sybil-resistant, multichain** token launchpad that ensures fai
 ✅ Zircuit Deployment  
 ✅ Humanity Protocol Integration  
 ✅ Basic Bonding Curve  
-🔜 Uniswap V4 Liquidity Integration  
-🔜 Wormhole Multichain Liquidity  
+✅ Uniswap V4 Liquidity Integration  
+✅ Wormhole Multichain Liquidity  
 
 
 ## 🏗️ Setup & Installation  
