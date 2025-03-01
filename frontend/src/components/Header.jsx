@@ -3,9 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
-  <div className="text-center mt-6">
-  <Link href="/" className="text-blue-400 hover:underline">← Back to Home</Link>
-</div>
   return (
     <div className="flex flex-row w-full justify-between items-center px-6 py-4 bg-gray-900 text-white">
       {/* Logo */}

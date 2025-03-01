@@ -4,46 +4,60 @@ import { useEffect, useState } from "react";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const BondingCurveChart = () => {
+const BondingCurveChart = ({ totalSupply, bondingCurveHoldings }) => {
   const [chartData, setChartData] = useState(null);
-  const [selectedCurve, setSelectedCurve] = useState("linear"); // Default curve
+  const [selectedCurve, setSelectedCurve] = useState("quadratic");
+  const [currentSupplyIndex, setCurrentSupplyIndex] = useState(null);
 
   useEffect(() => {
-    // Define supply range (1 to 1000 tokens)
-    const supply = Array.from({ length: 100 }, (_, i) => i + 1);
+    if (!totalSupply || !bondingCurveHoldings) return;
 
-    // Define bonding curve formulas
+    const supply = Array.from({ length: 100 }, (_, i) => (i + 1) * (totalSupply / 100)); // Scale data
+
     const curves = {
-      linear: supply.map(x => 0.01 * x),
-      exponential: supply.map(x => 0.005 * Math.exp(0.005 * x)),
-      logarithmic: supply.map(x => 0.5 * Math.log(x + 1)),
-      quadratic: supply.map(x => 0.00005 * x ** 2), // x² curve (scaled down)
+      linear: supply.map(x => 0.01 * x), // Linear formula
+      exponential: supply.map(x => 0.005 * Math.exp(0.005 * x)), // Exponential formula
+      logarithmic: supply.map(x => 0.5 * Math.log(x + 1)), // Logarithmic formula
+      quadratic: supply.map(x => 0.00005 * x ** 2), // Quadratic formula
     };
 
-    // Set chart data based on selected curve
+    // ** Find Index Closest to the Current Total Supply **
+    const closestIndex = supply.findIndex(x => x >= bondingCurveHoldings);
+    setCurrentSupplyIndex(closestIndex);
+
     setChartData({
-      labels: supply,
+      labels: supply.map(x => x.toFixed(0)), // Round values for clarity
       datasets: [
         {
           label: `${selectedCurve.charAt(0).toUpperCase() + selectedCurve.slice(1)} Curve`,
           data: curves[selectedCurve],
           borderColor: selectedCurve === "linear" ? "#22C55E" :
                        selectedCurve === "exponential" ? "#FACC15" :
-                       selectedCurve === "logarithmic" ? "#3B82F6" : "#E11D48", // Red for Quadratic
+                       selectedCurve === "logarithmic" ? "#3B82F6" : "#E11D48", // Color based on type
           backgroundColor: "rgba(255, 255, 255, 0.1)",
           borderWidth: 2,
           pointRadius: 1,
         },
+        // ** Marker for Current Supply **
+        {
+          label: "Current Supply",
+          data: supply.map((_, i) => (i === closestIndex ? curves[selectedCurve][i] : null)), // Highlight only one point
+          borderColor: "#FFFFFF", // White color for visibility
+          backgroundColor: "#FFFFFF",
+          borderWidth: 4,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          showLine: false
+        },
       ],
     });
-  }, [selectedCurve]); // Runs whenever the selected curve changes
+  }, [selectedCurve, totalSupply, bondingCurveHoldings]);
 
   return (
     <div className="bg-[#1A1A2E] p-6 rounded-lg border border-[#292B3A] shadow-lg">
       <h2 className="text-white text-xl font-bold mb-4">Bonding Curve Visualization</h2>
-      
-      {/* Dropdown to select curve */}
-      <select 
+
+      {/* <select 
         className="w-full bg-[#2A2D3E] text-white p-2 rounded-lg mb-4 border border-[#3B3E5A]"
         value={selectedCurve}
         onChange={(e) => setSelectedCurve(e.target.value)}
@@ -52,9 +66,8 @@ const BondingCurveChart = () => {
         <option value="exponential">Exponential</option>
         <option value="logarithmic">Logarithmic</option>
         <option value="quadratic">Quadratic (x²)</option>
-      </select>
+      </select> */}
 
-      {/* Display chart */}
       {chartData && <Line data={chartData} />}
     </div>
   );

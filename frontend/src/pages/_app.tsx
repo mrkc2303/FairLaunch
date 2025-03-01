@@ -10,6 +10,7 @@ import { WagmiProvider } from 'wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 
 import { config } from '../wagmi';
+import { CampaignProvider } from '../context/CampaignContext';
 
 const client = new QueryClient();
 
@@ -29,9 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/favicon.ico" />
             <title>FairLaunch</title>
           </Head>
-          <div className="min-h-screen bg-[#0D0D0D] text-white font-poppins">
-            {loading ? <SplashScreen onFinish={() => setLoading(false)} /> : <Component {...pageProps} />}
-          </div>
+          <CampaignProvider>
+            <div className="min-h-screen bg-[#0D0D0D] text-white font-poppins">
+              {loading ? <SplashScreen onFinish={() => setLoading(false)} /> : <Component {...pageProps} />}
+            </div>
+          </CampaignProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
