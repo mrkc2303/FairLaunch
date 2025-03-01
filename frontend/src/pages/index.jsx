@@ -14,13 +14,13 @@ export default function Home() {
       
       <div className="mx-5 py-10">
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <Link href="/create">
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg">
               + Create New Token
             </button>
           </Link>
-        </div>
+        </div> */}
 
         <h2 className="text-2xl font-bold mb-4">Live & Upcoming Token Launches</h2>
 
