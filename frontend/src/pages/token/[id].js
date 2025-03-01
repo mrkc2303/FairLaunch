@@ -270,8 +270,8 @@
                   <ul className="text-gray-400 text-sm">
                       {holders.map((holder, index) => (
                       <li key={index} className="flex justify-between">
-                          <span>{index + 1}. {holder.address}</span>
-                          <span>{holder.balance.toLocaleString()} tokens ({holder.percentage})</span>
+                      <span>{index + 1}. {String(netConfig?.bonding) !== String(holder.address) ? holder.address.slice(0, 15) + "..." : `${holder.address.slice(0, 15)}... (Curve)`}</span>
+                      <span>{holder.balance.toLocaleString()} tokens ({holder.percentage})</span>
                       </li>
                       ))}
                   </ul>
