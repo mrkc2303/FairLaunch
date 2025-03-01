@@ -48,8 +48,6 @@ FairLaunch is a **sybil-resistant, multichain** token launchpad that ensures fai
 🔜 Uniswap V4 Liquidity Integration  
 🔜 Wormhole Multichain Liquidity  
 
-## 📸 Screenshots  
-_Add relevant screenshots of the dApp here._  
 
 ## 🏗️ Setup & Installation  
 ```bash
