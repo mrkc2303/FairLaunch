@@ -34,6 +34,9 @@ contract TokenFactory {
 
     function deployToken(CampaignParams memory _campaign, uint256 initialBuy) external limitedAmount(initialBuy){
         MemeToken token = new MemeToken(_campaign.tokenName,_campaign.tokenTicker, address(BondingCurveAddress));
+        uint256 tokenToSend = BondingCurveAddress.getTokenAmount(address(token), initialBuy);
+        BondingCurveAddress.sendToken(address(token), msg.sender, tokenToSend);
+        tokenCreator[address(token)] = msg.sender;
         emit CampaignCreated(_campaign, address(token));
     }
 
