@@ -1,11 +1,24 @@
-import { createContext, useContext, useState, useEffect } from "react";
+interface Campaign {
+    tokenName: string;
+    tokenTicker: string;
+    description: string;
+    image: string;
+    tokenAddress: string;
+    blockNumber: number;
+  }  
+
+import { createContext, useContext, useState, useEffect, SetStateAction, Dispatch } from "react";
 import { getCampaignCreatedEvents } from "../utils/getEvents";
-import { startBlock } from "../constants/networkMapping";
 
-const CampaignContext = createContext(null);
+interface CampaignContextType {
+    campaigns: Campaign[];
+    setCampaigns: Dispatch<SetStateAction<Campaign[]>>;
+  }
 
-export const CampaignProvider = ({ children }) => {
-  const [campaigns, setCampaigns] = useState([]);
+const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
+
+export const CampaignProvider = ({ children }: any) => {
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
   useEffect(() => {
     async function fetchCampaigns() {

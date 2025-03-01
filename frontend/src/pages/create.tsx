@@ -20,6 +20,7 @@ export default function CreateToken() {  // ✅ Removed `async`
     image: "",
     description: "",
     initialUSDC: "",
+    banner: ""
   });
 
   // ✅ Fetch signer and network config only once
@@ -33,12 +34,12 @@ export default function CreateToken() {  // ✅ Removed `async`
       const _signer = await newProvider.getSigner();
       setSigner(_signer);
 
-      const config = await getNetworkConfig(); // ✅ Fetch network config dynamically
+      const config = await getNetworkConfig();
       setNetworkConfig(config);
     }
 
     initialize();
-  }, [walletClient]); // ✅ Runs when walletClient changes
+  }, [walletClient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTokenDetails({ ...tokenDetails, [e.target.name]: e.target.value });
@@ -94,7 +95,8 @@ export default function CreateToken() {  // ✅ Removed `async`
           tokenName: tokenDetails.name,
           tokenTicker: tokenDetails.ticker,
           description: tokenDetails.description,
-          image: tokenDetails.image,
+          bannerUrl: tokenDetails.banner,
+          posterUrl: tokenDetails.image,
         },
         usdcAmount,
         { gasLimit: 800000 }
@@ -125,6 +127,11 @@ export default function CreateToken() {  // ✅ Removed `async`
           <input type="text" name="ticker" value={tokenDetails.ticker} onChange={handleChange}
                  className="w-full border p-2 rounded bg-[#2A2D3E] text-white mb-4"
                  placeholder="Enter Token Symbol (e.g. MEME)" />
+
+          <label className="block mb-2 text-gray-300">Banner Image URL</label>
+          <input type="text" name="image" value={tokenDetails.banner} onChange={handleChange}
+                 className="w-full border p-2 rounded bg-[#2A2D3E] text-white mb-4"
+                 placeholder="Enter Image URL" />
 
           <label className="block mb-2 text-gray-300">Token Image URL</label>
           <input type="text" name="image" value={tokenDetails.image} onChange={handleChange}

@@ -17,6 +17,11 @@
     },
     {
       "inputs": [],
+      "name": "CampaignAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
       "name": "LimitAmountExceeded",
       "type": "error"
     },
@@ -47,7 +52,12 @@
             },
             {
               "internalType": "string",
-              "name": "image",
+              "name": "bannerUrl",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "posterUrl",
               "type": "string"
             }
           ],
@@ -131,7 +141,12 @@
             },
             {
               "internalType": "string",
-              "name": "image",
+              "name": "bannerUrl",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "posterUrl",
               "type": "string"
             }
           ],
@@ -200,4 +215,4 @@
       "stateMutability": "view",
       "type": "function"
     }
-]
+  ]

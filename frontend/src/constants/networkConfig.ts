@@ -1,12 +1,20 @@
-export const NETWORK_CONFIG = {
-    11155111: { // Sepolia Testnet
-      name: "Sepolia",
-      rpcUrl: "https://gateway.tenderly.co/public/sepolia",
-      whitelisted: "0x3842CFcaeBaD3b8Bd610a3EC941Ab56a0F836166",
-      bonding: "0x2566c080601fF3dD2E4468A60a717A4F987863fc",
-      factory: "0xfe73006EC43a43B5062669bEAD7C5a088750637f",
-      USDCToken: "0x9Fb12C42Fd17062EC67D29ac7C35Ad3957D1620b",
-      startBlock: 7800000,
+
+export const NETWORK_CONFIG: { [key: number]: { 
+    name: string;
+    rpcUrl: string;
+    whitelisted: string;
+    bonding: string;
+    factory: string;
+    USDCToken: string;
+    startBlock: number;
+  } } = {
+    11155111: {
+        name: "Sepolia",
+        rpcUrl: "https://gateway.tenderly.co/public/sepolia",
+        whitelisted: "0x7c353533C192e5096cE01C3F2D8BA2CDeC184920",
+        bonding: "0xd6B1CC8a1eD4DAbEF0A0425030CcbE3571A239d4",
+        factory: "0x1030beED2D98c68f45B791B9Bdc9E184bc53fef4",
+        USDCToken: "0x9Fb12C42Fd17062EC67D29ac7C35Ad3957D1620b",
+        startBlock: 7800000,
     },
   };
-  
