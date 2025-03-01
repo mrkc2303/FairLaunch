@@ -3,6 +3,7 @@ interface Campaign {
     tokenTicker: string;
     description: string;
     image: string;
+    posterUrl: string;
     tokenAddress: string;
     blockNumber: number;
   }  
@@ -36,5 +37,10 @@ export const CampaignProvider = ({ children }: any) => {
 };
 
 export const useCampaigns = () => {
-  return useContext(CampaignContext);
-};
+    const context = useContext(CampaignContext);
+    if (!context) {
+      throw new Error("useCampaigns must be used within a CampaignProvider");
+    }
+    return context;
+  };
+  

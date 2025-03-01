@@ -33,9 +33,10 @@ export async function getCampaignCreatedEvents() {
       tokenName: event.args._campaign.tokenName,
       tokenTicker: event.args._campaign.tokenTicker,
       description: event.args._campaign.description,
-      image: event.args._campaign.image,
+      image: event.args._campaign.bannerUrl,
+      posterUrl: event.args._campaign.posterUrl,
       tokenAddress: event.args._token,
-      blockNumber: event.blockNumber, // Extra data for sorting/debugging
+      blockNumber: event.blockNumber,
     }));
 
     console.log("Fetched campaign events:", data);

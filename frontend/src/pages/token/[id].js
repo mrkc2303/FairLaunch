@@ -11,7 +11,7 @@
   import ERC20ABI from "../../constants/ERC20ABI.json";
   import BondingCurveABI from "../../constants/BondingCurveABI.json";
   import { useAccount } from "wagmi";
-  import { Loader } from "../../components/Loader"
+  import Loader from "../../components/Loader"
   
   export default function TokenDetail() {
       const router = useRouter();

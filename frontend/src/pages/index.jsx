@@ -35,7 +35,7 @@ export default function Home() {
                   {/* Image Wrapper */}
                   <div className="relative w-full h-40 overflow-hidden rounded-lg">
                     <Image 
-                      src={token.image !== "test" ? token.image : "https://picsum.photos/400/300?random=" + index} 
+                      src={(token.image !== "test" || token.image || token.image != undefined) ? token.image : "https://picsum.photos/400/300?random=" + index} 
                       alt={token.tokenName} 
                       layout="fill"
                       objectFit="cover"
