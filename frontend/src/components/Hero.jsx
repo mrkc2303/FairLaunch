@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
     return (
@@ -12,12 +13,9 @@ export default function Hero() {
   
         {/* Buttons Container (Ensure Higher Z-Index) */}
         <div className="mt-6 flex space-x-4 relative z-10">
-          <button className="px-6 py-3 bg-purple-600 hover:bg-purple-700 transition-all rounded-lg text-lg font-semibold">
-            Let’s Explore
-          </button>
-          <button className="px-6 py-3 bg-gray-700 hover:bg-gray-800 transition-all rounded-lg text-lg font-semibold">
-            Latest Projects
-          </button>
+          <Link className="px-6 py-3 bg-purple-600 hover:bg-purple-700 transition-all rounded-lg text-lg font-semibold" href="/create">
+            + Create New Token
+          </Link>
         </div>
   
         {/* Rocket Image Container (Lower Z-Index to Avoid Blocking Clicks) */}
